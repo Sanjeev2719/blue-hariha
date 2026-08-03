@@ -66,6 +66,7 @@ function ProjectCardTile({ project, idx, onSelect, isPaused }: { project: Projec
         {project.video ? (
           <video
             src={safeUrl(project.video)}
+            poster={safeUrl(project.image)}
             autoPlay
             loop
             muted
@@ -309,6 +310,7 @@ export default function ProjectGallery() {
                     {selectedProject.video ? (
                       <video
                         src={safeUrl(selectedProject.video)}
+                        poster={safeUrl(selectedProject.image)}
                         controls
                         autoPlay
                         loop
