@@ -1,0 +1,6 @@
+{
+  "name": "Premium Construction Website",
+  "description": "A premium beige-themed construction company website featuring an active construction video hero, custom service sections, an interactive project gallery with filtering, a contact form, and direct WhatsApp quote/inquiry integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

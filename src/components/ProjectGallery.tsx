@@ -5,6 +5,11 @@ import { Project } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Calendar, Layers, X, MessageSquare, ArrowRight, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
+const safeUrl = (url?: string) => {
+  if (!url) return '';
+  return encodeURI(decodeURI(url));
+};
+
 function ProjectCardTile({ project, idx, onSelect, isPaused }: { project: Project; idx: number; onSelect: (project: Project) => void; isPaused?: boolean; key?: string }) {
   const images = project.images && project.images.length > 0 ? project.images : [project.image];
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
@@ -12,7 +17,7 @@ function ProjectCardTile({ project, idx, onSelect, isPaused }: { project: Projec
   useEffect(() => {
     images.forEach((src) => {
       const img = new Image();
-      img.src = src;
+      img.src = safeUrl(src);
     });
   }, [images]);
 
@@ -60,7 +65,7 @@ function ProjectCardTile({ project, idx, onSelect, isPaused }: { project: Projec
       <div className="aspect-4/3 w-full overflow-hidden relative rounded-t-3xl bg-[#0F172A]">
         {project.video ? (
           <video
-            src={project.video}
+            src={safeUrl(project.video)}
             autoPlay
             loop
             muted
@@ -71,7 +76,7 @@ function ProjectCardTile({ project, idx, onSelect, isPaused }: { project: Projec
           images.map((imgUrl, i) => (
             <motion.img
               key={imgUrl}
-              src={imgUrl}
+              src={safeUrl(imgUrl)}
               alt={project.title}
               initial={false}
               animate={{
@@ -303,7 +308,7 @@ export default function ProjectGallery() {
                   <div className="w-full md:w-[62%] relative bg-[#0F172A] flex flex-col justify-center items-center overflow-hidden min-h-[300px] md:min-h-full h-1/2 md:h-full">
                     {selectedProject.video ? (
                       <video
-                        src={selectedProject.video}
+                        src={safeUrl(selectedProject.video)}
                         controls
                         autoPlay
                         loop
@@ -315,7 +320,7 @@ export default function ProjectGallery() {
                       projectImages.map((imgUrl, imgIdx) => (
                         <motion.img
                           key={imgUrl}
-                          src={imgUrl}
+                          src={safeUrl(imgUrl)}
                           alt={selectedProject.title}
                           initial={false}
                           animate={{
